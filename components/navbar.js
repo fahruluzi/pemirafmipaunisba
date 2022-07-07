@@ -8,7 +8,7 @@ export default function Navbar(props) {
         <div id="navbar" className="px-12 py-8 min-w-full fixed z-10 font-poppins uppercase font-medium">
             <div className="flex justify-between">
                 <div className="my-auto">
-                    <Image height={50} width={90} src={"/logo-fmipa.png"} alt={"logo"}></Image>
+                    <Image height={50} width={80} src={"/logo-fmipa.png"} alt={"logo"}></Image>
                 </div>
                 <div className="my-auto flex">
                     <NavbarButton name="beranda" active={active === 0} handlePageChange={handlePageChange} index={0}/>

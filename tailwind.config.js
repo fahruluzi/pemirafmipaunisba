@@ -10,6 +10,9 @@ module.exports = {
         'secondary': '#F8C511',
         'alert-warning-background' : '#FEF5E2'
       },
+      boxShadow: {
+        "count" : '1px 7px 5px rgba(0, 0, 0, 0.7)',
+      }
     },
     fontFamily: {
       'poppins' : ['Poppins', "Open Sans", '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen',
