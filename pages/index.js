@@ -5,6 +5,7 @@ import { useState } from "react";
 
 import ReactPageScroller from 'react-page-scroller';
 import Home from "../components/landing/home";
+import Bem from "../components/landing/bem";
 
 const Index = () => {
 
@@ -22,10 +23,7 @@ const Index = () => {
                 customPageNumber={currentPage}
             >
                 <Home />
-                <div
-                    className={`section ${styles["landing-container-child"]} ${styles["landing-container-home"]}`}>
-                    <h1>Item 2</h1>
-                </div>
+                <Bem />
                 <div
                     className={`section ${styles["landing-container-child"]} ${styles["landing-container-home"]}`}>
                     <h1>Item 3</h1>

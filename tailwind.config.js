@@ -8,7 +8,8 @@ module.exports = {
     extend: {
       colors: {
         'secondary': '#F8C511',
-        'alert-warning-background' : '#FEF5E2'
+        'alert-warning-background' : '#FEF5E2',
+        'card' : 'rgba(245, 245, 245, 0.7)',
       },
       boxShadow: {
         "count" : '1px 7px 5px rgba(0, 0, 0, 0.7)',

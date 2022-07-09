@@ -1,5 +1,35 @@
-@mixin desktop() {
-  @media (max-width: 600px) {
+$layout-sm: 640px;
+$layout-md: 768px;
+$layout-lg: 1024px;
+$layout-xl: 1280px;
+$layout-2xl: 1536px;
+
+@mixin layout-sm() {
+  @media (min-width: $layout-sm) {
+    @content;
+  }
+}
+
+@mixin layout-md() {
+  @media (min-width: $layout-md) {
+    @content;
+  }
+}
+
+@mixin layout-lg() {
+  @media (min-width: $layout-lg) {
+    @content;
+  }
+}
+
+@mixin layout-xl() {
+  @media (min-width: $layout-xl) {
+    @content;
+  }
+}
+
+@mixin layout-2xl() {
+  @media (min-width: $layout-2xl) {
     @content;
   }
 }
