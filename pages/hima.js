@@ -56,23 +56,23 @@ const Himasta = () => {
 
     const router = useRouter()
 
-    const getAuth = async () => {
-        try {
-            const token = localStorage.getItem('token');
-            if (token === ""){
-                router.push('/login');
-            }else {
-                const verified = jwt.verify(token, "pemira_secret_banget");
-                localStorage.setItem('user', verified)
-            }
-        } catch (error) {
-            router.push('/login');
-        }
-    };
-
-    useState(() => {
-        getAuth()
-    }, [router.pathname]); // eslint-disable-line react-hooks/exhaustive-deps
+    // const getAuth = async () => {
+    //     try {
+    //         const token = localStorage.getItem('token');
+    //         if (token === ""){
+    //             router.push('/login');
+    //         }else {
+    //             const verified = jwt.verify(token, "pemira_secret_banget");
+    //             localStorage.setItem('user', verified)
+    //         }
+    //     } catch (error) {
+    //         router.push('/login');
+    //     }
+    // };
+    //
+    // useState(() => {
+    //     getAuth()
+    // }, [router.pathname]); // eslint-disable-line react-hooks/exhaustive-deps
 
 
     const [choose, setChoose] = useState(99)

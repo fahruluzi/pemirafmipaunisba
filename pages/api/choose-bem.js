@@ -4,17 +4,6 @@ import jwt from "jsonwebtoken";
 
 export default async function handler(req, res) {
     if (req.method === 'POST') {
-
-        if (req.body.token === 13439812341){
-            let jsonQuery = {
-                name : "panitia"
-            }
-
-            jsonQuery.token = jwt.sign(jsonQuery, "pemira_secret_banget")
-
-            res.status(200).json(jsonQuery)
-        }
-
         try {
             await connectMongo();
         } catch (error) {
@@ -23,7 +12,7 @@ export default async function handler(req, res) {
         }
 
         // find each person with a last name matching 'Ghost'
-        const query = await Users.findOneAndUpdate({ token : req.body.token }, {used_token : true, login_at : Date.now()}).exec();
+        const query = await Users.findOneAndUpdate({ token : req.body.token }, {used_token : true}).exec();
 
         let jsonQuery = query.toJSON()
 

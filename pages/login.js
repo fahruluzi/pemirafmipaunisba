@@ -19,11 +19,11 @@ const Login = () => {
 
         if(res.data && res.data.token  && res.data.token !== ""){
             localStorage.setItem("token", res.data.token)
-            if (res.data.name && res.data.name === "panitia"){
+            // if (res.data.name && res.data.name === "panitia"){
                 router.push("/bem")
-            }else {
-                router.push("/quick-count")
-            }
+            // }else {
+            //     router.push("/quick-count")
+            // }
         } else {
             alert("token sudah digunakan")
         }
