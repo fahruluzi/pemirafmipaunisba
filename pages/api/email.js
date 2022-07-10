@@ -1,27 +1,30 @@
-import {SMTPClient} from 'emailjs';
+import nodemailer from 'nodemailer';
 
 export default function handler(req, res) {
     if(req.method === 'POST') {
-        const client = new SMTPClient({
-            user: "cocakunku52@gmail.com",
-            password: "Fahrul10",
-            host: 'smtp.gmail.com',
-            ssl: true
+
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: 'fahrulf594@gmail.com',
+                pass: 'rpjplmvvhbwqbhte' // naturally, replace both with your real credentials or an application-specific password
+            }
         });
 
-        try {
-            client.send(
-                {
-                    text: `Just for testing purpose`,
-                    from: "fahrulf594@gmail.com",
-                    to: "fahrul.fauz@gmail.com",
-                    subject: 'testing emailjs',
-                }
-            )
-        } catch (e) {
-            res.status(400).end(JSON.stringify({message: "Error"}))
-            return;
-        }
+        const mailOptions = {
+            from: '<noreply> no-reply@bppufmipaunisba.com',
+            to: 'langitkode@gmail.com, fahrul.fauz@gmail.com',
+            subject: 'Token PEMIRA FMIPA UNISBA 2022',
+            text: 'Dudes, we really need your money.'
+        };
+
+        transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+                console.log(error);
+            } else {
+                console.log('Email sent: ' + info.response);
+            }
+        });
 
         res.status(200).end(JSON.stringify({message: 'Send Mail'}))
     } else {

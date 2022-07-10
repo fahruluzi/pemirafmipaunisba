@@ -1,16 +1,15 @@
 import Navbar from "../components/navbar";
-import Head from 'next/head'
 
 import { useState } from "react";
 
 import ReactPageScroller from 'react-page-scroller';
-import Home from "../components/landing/home";
-import Bem from "../components/landing/bem";
-import Himasta from "../components/landing/himasta";
-import Himatika from "../components/landing/himatika";
-import Himafar from "../components/landing/himafar";
+import Bem from "../components/quick_count/bem";
+import Himasta from "../components/quick_count/himasta";
+import Himatika from "../components/quick_count/himatika";
+import Himafar from "../components/quick_count/himafar";
+import Head from "next/head";
 
-const Index = () => {
+const QuickCount = () => {
 
     const [currentPage, setCurrentPage] = useState(0)
 
@@ -24,12 +23,11 @@ const Index = () => {
                 <title>PEMIRA FMIPA UNISBA</title>
                 <link rel="icon" href="/bppu.png" />
             </Head>
-            <Navbar active={currentPage} handlePageChange={handlePageChange} quickCount={false}/>
+            <Navbar active={currentPage} handlePageChange={handlePageChange} quickCount={true}/>
             <ReactPageScroller
                 pageOnChange={handlePageChange}
                 customPageNumber={currentPage}
             >
-                <Home />
                 <Bem />
                 <Himasta />
                 <Himatika />
@@ -39,4 +37,4 @@ const Index = () => {
     )
 }
 
-export default Index;
+export default QuickCount;

@@ -21,21 +21,12 @@ const Himafar = () => {
                             <span className="font-medium text-sm block">Jahra Farhanuddin</span>
                         </div>
                     </div>
-                    <div className="text-left mt-4">
-                        <span className="font-medium text-sm block">VISI</span>
-                        <p className="text-xs">Himafar sebagai wadah pembelajar, serta pengembangan untuk menciptakan mahasiswa yang produktif, kreatif dan innovatif yang bermanfaat bagi masyarakat.</p>
-                    </div>
-                    <div className="text-left mt-2">
-                        <span className="font-medium text-sm block">MISI</span>
-                        <ul className="text-xs mt-2">
-                            <li>- Menciptakan rasa profesionalitas, tanggung jawab dan kenyaman dalam berorganisasi
-                                untuk meningkatkan mutu kerja pengurus</li>
-                        </ul>
-                    </div>
-                    <div className="border-t-2 border-t-gray-400 mt-2 text-right flex justify-between">
-                        <span className="text-sm font-bold block mb-auto">Nomor Urut 1</span>
-                        {/*<span*/}
-                        {/*    className="text-xs block mt-2 cursor-pointer hover:text-secondary">Lihat Selengkapnya..</span>*/}
+
+                    <span className="font-medium text-6xl block mt-8">80%</span>
+
+                    <div className="border-t-2 border-t-gray-400 mt-6 text-right flex justify-between">
+                        <span className="text-sm font-bold block mt-2">Nomor Urut 1</span>
+                        {/*<span className="text-xs block mt-2 cursor-pointer hover:text-secondary">Lihat Selengkapnya..</span>*/}
                     </div>
                 </div>
                 <div className="flex-col justify-between bg-card w-96 rounded-xl px-3 pt-3 pb-5">
@@ -48,25 +39,16 @@ const Himafar = () => {
                             <span className="font-medium text-sm block">M. Ariq Akhsyal</span>
                         </div>
                     </div>
-                    <div className="text-left mt-4">
-                        <span className="font-medium text-sm block">VISI</span>
-                        <p className="text-xs">Mewujudkan HIMAFAR UNISBA yang bergerak secara dedikatif, responsif, dan kreativ melalui kolaborasi civitas akademia Farmasi</p>
-                    </div>
-                    <div className="text-left mt-2">
-                        <span className="font-medium text-sm block">MISI</span>
-                        <ul className="text-xs mt-2">
-                            <li>- Sense Togetherness and Professiinality</li>
-                            <li>- Communiation Within Action</li>
-                            <li>- From Ask to Act</li>
-                        </ul>
-                    </div>
-                    <div className="border-t-2 border-t-gray-400 mt-2 mb-auto text-right flex justify-between">
+
+                    <span className="font-medium text-6xl block mt-8">80%</span>
+
+                    <div className="border-t-2 border-t-gray-400 mt-6 text-right flex justify-between">
                         <span className="text-sm font-bold block mt-2">Nomor Urut 2</span>
-                        {/*<span*/}
-                        {/*    className="text-xs block mt-2 cursor-pointer hover:text-secondary">Lihat Selengkapnya..</span>*/}
+                        {/*<span className="text-xs block mt-2 cursor-pointer hover:text-secondary">Lihat Selengkapnya..</span>*/}
                     </div>
                 </div>
             </div>
+            <span className="mt-6 font-bold">JUMLAH PEMILIH : 70%</span>
         </div>
     )
 }
