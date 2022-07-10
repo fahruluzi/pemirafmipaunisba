@@ -7,10 +7,11 @@ const Home = () => {
     const router = useRouter()
     let [days, hours, minutes, seconds] = useCountdown(1657504800000);
 
-    days =0
-    hours =0
-    minutes =0
-    seconds=0
+    // TODO : HAPUS INI PAK
+    // days =0
+    // hours =0
+    // minutes =0
+    // seconds=0
 
     const handleClick = (e) => {
         e.preventDefault()
