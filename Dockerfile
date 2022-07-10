@@ -12,13 +12,13 @@ RUN npm install --global pm2
 COPY ./package*.json ./
 
 # Install dependencies
-RUN npm install --production --omit=dev
+RUN yarn install
 
 # Copy all files
 COPY ./ ./
 
 # Build app
-RUN npm run build
+RUN yarn build
 
 # Expose the listening port
 EXPOSE 3000
@@ -28,4 +28,4 @@ EXPOSE 3000
 USER node
 
 # Run npm start script with PM2 when container starts
-CMD [ "pm2-runtime", "npm", "--", "start" ]
+CMD [ "pm2-runtime", "yarn", "--", "start" ]
