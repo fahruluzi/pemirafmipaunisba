@@ -1,11 +1,13 @@
 import Navbar from "../components/navbar";
-import styles from '../styles/landing/Landing.module.scss';
 
 import { useState } from "react";
 
 import ReactPageScroller from 'react-page-scroller';
 import Home from "../components/landing/home";
 import Bem from "../components/landing/bem";
+import Himasta from "../components/landing/himasta";
+import Himatika from "../components/landing/himatika";
+import Himafar from "../components/landing/himafar";
 
 const Index = () => {
 
@@ -24,18 +26,9 @@ const Index = () => {
             >
                 <Home />
                 <Bem />
-                <div
-                    className={`section ${styles["landing-container-child"]} ${styles["landing-container-home"]}`}>
-                    <h1>Item 3</h1>
-                </div>
-                <div
-                    className={`section ${styles["landing-container-child"]} ${styles["landing-container-home"]}`}>
-                    <h1>Item 4</h1>
-                </div>
-                <div
-                    className={`section ${styles["landing-container-child"]} ${styles["landing-container-home"]}`}>
-                    <h1>Item 5</h1>
-                </div>
+                <Himasta />
+                <Himatika />
+                <Himafar />
             </ReactPageScroller>
         </>
     )
