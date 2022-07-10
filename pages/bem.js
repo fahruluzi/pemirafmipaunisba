@@ -29,6 +29,10 @@ const Bem = () => {
                 if (!verified){
                     router.push('/login');
                 }
+
+                if (verified.name === "panitia") {
+                    router.push('/quick-count');
+                }
             }
         } catch (error) {
             router.push('/login');
