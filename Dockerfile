@@ -6,11 +6,11 @@ COPY package.json ./
 
 COPY package-lock.json ./
 
-RUN npm install
+RUN yarn install
 
 COPY . .
 
-RUN npm run build
+RUN yarn build
 
 
 FROM nginx:1.19-alpine AS server
