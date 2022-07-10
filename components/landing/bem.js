@@ -41,7 +41,7 @@ const Bem = () => {
 
                     <div className="border-t-2 border-t-gray-400 mt-2 text-right flex justify-between">
                         <span className="text-sm font-bold block mt-2">Nomor Urut 1</span>
-                        <span className="text-xs block mt-2 cursor-pointer hover:text-secondary">Lihat Selengkapnya..</span>
+                        {/*<span className="text-xs block mt-2 cursor-pointer hover:text-secondary">Lihat Selengkapnya..</span>*/}
                     </div>
                 </div>
             </div>
