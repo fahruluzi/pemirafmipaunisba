@@ -14,7 +14,7 @@ const Home = () => {
 
     const handleClick = (e) => {
         e.preventDefault()
-        router.push("/bem")
+        router?.push("/bem")
     }
 
     return (

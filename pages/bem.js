@@ -1,11 +1,13 @@
 import styles from '../styles/Bem.module.scss';
 import Image from "next/image";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Head from "next/head";
 import {useRouter} from "next/router";
 const jwt = require('jsonwebtoken');
 
 const Bem = () => {
+    const router = useRouter()
+
     const candidate = [
         {
             lead_name: "Rizky Setiawan",
@@ -15,8 +17,6 @@ const Bem = () => {
             number: 1
         }
     ]
-
-    const router = useRouter()
 
     const getAuth = async () => {
         try {
@@ -32,7 +32,7 @@ const Bem = () => {
         }
     };
 
-    useState(() => {
+    useEffect(() => {
         getAuth()
     }, [router.pathname]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -71,7 +71,7 @@ const Bem = () => {
     }
 
     const handleSubmit = () => {
-        console.log(choose, major)
+        console.log(choose)
         toogleWarning()
     }
 

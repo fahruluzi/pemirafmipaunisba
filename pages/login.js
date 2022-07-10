@@ -6,8 +6,8 @@ import axios from "axios";
 import {useRouter} from "next/router";
 
 const Login = () => {
-    const [token, setToken] = useState("");
     const router = useRouter()
+    const [token, setToken] = useState("");
 
     const handleSubmit = async () => {
         const res = await axios.post(`/api/token`, {
@@ -20,7 +20,7 @@ const Login = () => {
         if(res.data && res.data.token  && res.data.token !== ""){
             localStorage.setItem("token", res.data.token)
             // if (res.data.name && res.data.name === "panitia"){
-                router.push("/bem")
+                await router.push("/bem")
             // }else {
             //     router.push("/quick-count")
             // }

@@ -1,6 +1,6 @@
 import Navbar from "../components/navbar";
 
-import { useState } from "react";
+import {useEffect, useState} from "react";
 
 import ReactPageScroller from 'react-page-scroller';
 import Bem from "../components/quick_count/bem";
@@ -12,6 +12,7 @@ import {useRouter} from "next/router";
 import jwt from "jsonwebtoken";
 
 const QuickCount = () => {
+    const router = useRouter()
 
     const [currentPage, setCurrentPage] = useState(0)
 
@@ -19,9 +20,10 @@ const QuickCount = () => {
         setCurrentPage(number)
     };
 
-    const router = useRouter()
+    console.log(router)
+    console.log("router")
 
-    const getAuth = async () => {
+    useEffect(() => {
         try {
             const token = localStorage.getItem('token');
             if (token === ""){
@@ -31,12 +33,11 @@ const QuickCount = () => {
                 localStorage.setItem('user', verified)
             }
         } catch (error) {
-            router.push('/login');
+            router.push('/login', "/login", {
+                isReady : true,
+            });
         }
-    };
 
-    useState(() => {
-        getAuth()
     }, [router.pathname]); // eslint-disable-line react-hooks/exhaustive-deps
 
 

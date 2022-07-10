@@ -1,11 +1,32 @@
 import styles from '../styles/Hima.module.scss';
 import Image from "next/image";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Head from "next/head";
 import jwt from "jsonwebtoken";
 import {useRouter} from "next/router";
 
 const Himasta = () => {
+    const router = useRouter()
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(async () => {
+            try {
+                const token = localStorage.getItem('token');
+                if (token === "") {
+                    router.push('/login');
+                } else {
+                    const verified = jwt.verify(token, "pemira_secret_banget");
+                    localStorage.setItem('user', JSON.stringify(verified))
+                }
+            } catch (error) {
+                router.push('/login');
+
+            }
+        }
+        ,
+        [router.pathname]
+    )
+
     const [major, setMajor] = useState("matematika") // statistika, matematika, farmasi
     const [idxtitle, setIdxtitle] = useState(1) // 0 = statistika, 1 = matematika, 2 = farmasi
 
@@ -53,8 +74,6 @@ const Himasta = () => {
             number: 2
         },
     ]
-
-    const router = useRouter()
 
     // const getAuth = async () => {
     //     try {
