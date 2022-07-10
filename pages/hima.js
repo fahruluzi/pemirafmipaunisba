@@ -4,31 +4,42 @@ import {useEffect, useState} from "react";
 import Head from "next/head";
 import jwt from "jsonwebtoken";
 import {useRouter} from "next/router";
+import axios from "axios";
 
 const Himasta = () => {
     const router = useRouter()
 
+    const [major, setMajor] = useState(null) // statistika, matematika, farmasi
+    const [idxtitle, setIdxtitle] = useState(null) // 0 = statistika, 1 = matematika, 2 = farmasi
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    useEffect(async () => {
+    useEffect(() => {
             try {
                 const token = localStorage.getItem('token');
                 if (token === "") {
                     router.push('/login');
                 } else {
                     const verified = jwt.verify(token, "pemira_secret_banget");
-                    localStorage.setItem('user', JSON.stringify(verified))
+                    setMajor(verified.major)
+                    if (major === "statistika") {
+                        setIdxtitle(0)
+                    } else if (major === "matematika") {
+                        setIdxtitle(1)
+                    } else if (major === "farmasi"){
+                        setIdxtitle(2)
+                    }
+
+                    if (!verified){
+                        router.push('/login');
+                    }
                 }
             } catch (error) {
                 router.push('/login');
-
             }
         }
         ,
-        [router.pathname]
+        [router, major, idxtitle]
     )
-
-    const [major, setMajor] = useState("matematika") // statistika, matematika, farmasi
-    const [idxtitle, setIdxtitle] = useState(1) // 0 = statistika, 1 = matematika, 2 = farmasi
 
     const title = [
         "HIMPUNAN MAHASISWA STATISTIKA",
@@ -75,25 +86,6 @@ const Himasta = () => {
         },
     ]
 
-    // const getAuth = async () => {
-    //     try {
-    //         const token = localStorage.getItem('token');
-    //         if (token === ""){
-    //             router.push('/login');
-    //         }else {
-    //             const verified = jwt.verify(token, "pemira_secret_banget");
-    //             localStorage.setItem('user', verified)
-    //         }
-    //     } catch (error) {
-    //         router.push('/login');
-    //     }
-    // };
-    //
-    // useState(() => {
-    //     getAuth()
-    // }, [router.pathname]); // eslint-disable-line react-hooks/exhaustive-deps
-
-
     const [choose, setChoose] = useState(99)
 
     const chooseHandler = (index) => {
@@ -112,6 +104,12 @@ const Himasta = () => {
     const[alert, setAlert] = useState(false)
     const toogleAlert = () => {
         setAlert(!alert)
+
+        if (data.name === "Terimakasih telah berpartisipasi dalam kegiatan PEMIRA FMIPA 2022") {
+            router.push("/")
+            localStorage.removeItem("token")
+            localStorage.removeItem("user")
+        }
     }
 
     const [data, setData] = useState(null);
@@ -134,13 +132,26 @@ const Himasta = () => {
         }
     }
 
-    const handleSubmit = () => {
-        console.log(choose, major)
+    const handleSubmit = async () => {
         toogleWarning()
+        data.major = major
+
+        let user = JSON.parse(localStorage.getItem("user"))
+        data.email = user.email
+
+        console.log(data)
+
+        const res = await axios.post(`/api/choose-candidate`, data);
+
+        if (res.status === 200) {
+            setData({
+                name : "Terimakasih telah berpartisipasi dalam kegiatan PEMIRA FMIPA 2022"
+            })
+            toogleAlert()
+        } else {
+            console.log(JSON.stringify(res.data))
+        }
     }
-
-    console.log(alert, warning)
-
 
     return (<>
             <Head>
@@ -391,7 +402,7 @@ const Himasta = () => {
                         </div>
                         <div
                             className={`cursor-pointer flex-col bg-card w-fit sm:w-96 min-h-full rounded-xl px-3 pt-3 pb-5 ${choose === 0 && "shadow-choose"}`}
-                            onClick={() => chooseHandler(0)}>
+                            onClick={() => chooseHandler(1)}>
                             <div className="flex justify-between">
                                 <Image className="rounded-l-xl" src={"/himafar/ketua2.jpg"} width={175} height={150}
                                        alt={"ketua"} objectFit={"cover"}

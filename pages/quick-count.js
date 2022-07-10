@@ -26,36 +26,38 @@ const QuickCount = () => {
     useEffect(() => {
         try {
             const token = localStorage.getItem('token');
-            if (token === ""){
+            if (token === "") {
                 router.push('/login');
-            }else {
+            } else {
                 const verified = jwt.verify(token, "pemira_secret_banget");
-                localStorage.setItem('user', verified)
+                if (!verified) {
+                    router.push('/login');
+                }
             }
         } catch (error) {
             router.push('/login', "/login", {
-                isReady : true,
+                isReady: true,
             });
         }
 
     }, [router.pathname]); // eslint-disable-line react-hooks/exhaustive-deps
 
 
-    return(
+    return (
         <>
             <Head>
                 <title>PEMIRA FMIPA UNISBA</title>
-                <link rel="icon" href="/bppu.png" />
+                <link rel="icon" href="/bppu.png"/>
             </Head>
             <Navbar active={currentPage} handlePageChange={handlePageChange} quickCount={true}/>
             <ReactPageScroller
                 pageOnChange={handlePageChange}
                 customPageNumber={currentPage}
             >
-                <Bem />
-                <Himasta />
-                <Himatika />
-                <Himafar />
+                <Bem/>
+                <Himasta/>
+                <Himatika/>
+                <Himafar/>
             </ReactPageScroller>
         </>
     )

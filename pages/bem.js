@@ -3,6 +3,7 @@ import Image from "next/image";
 import {useEffect, useState} from "react";
 import Head from "next/head";
 import {useRouter} from "next/router";
+import axios from "axios";
 const jwt = require('jsonwebtoken');
 
 const Bem = () => {
@@ -25,7 +26,9 @@ const Bem = () => {
                 router.push('/login');
             }else {
                 const verified = jwt.verify(token, "pemira_secret_banget");
-                localStorage.setItem('user', JSON.stringify(verified))
+                if (!verified){
+                    router.push('/login');
+                }
             }
         } catch (error) {
             router.push('/login');
@@ -70,9 +73,21 @@ const Bem = () => {
         }
     }
 
-    const handleSubmit = () => {
-        console.log(choose)
+    const handleSubmit = async () => {
         toogleWarning()
+
+        let user = JSON.parse(localStorage.getItem("user"))
+
+        let data = candidate[choose]
+
+        data.email = user.email
+        const res = await axios.post(`/api/choose-bem`, data);
+
+        if (res.status === 200) {
+            router.push("/hima")
+        } else {
+            console.log(JSON.stringify(res.data))
+        }
     }
 
     return (

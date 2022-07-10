@@ -14,16 +14,17 @@ const Login = () => {
             token: token,
         });
 
-        console.log(res.response)
-        console.log(res.data)
-
         if(res.data && res.data.token  && res.data.token !== ""){
             localStorage.setItem("token", res.data.token)
-            // if (res.data.name && res.data.name === "panitia"){
-                await router.push("/bem")
-            // }else {
-            //     router.push("/quick-count")
-            // }
+
+            delete res.data.token
+            localStorage.setItem("user", JSON.stringify(res.data))
+
+            if (res.data.name && res.data.name === "panitia"){
+                router.push("/quick-count")
+            }else {
+                router.push("/bem")
+            }
         } else {
             alert("token sudah digunakan")
         }

@@ -4,13 +4,13 @@ import axios from "axios";
 export default async function handler(req, res) {
     if (req.method === 'POST') {
 
-        const major = req.body.major;
+        // const major = req.body.major;
 
         try {
             await connectMongo();
         } catch (error) {
             console.log(error);
-            res.json({error});
+            return res.json({error});
         }
 
         const query = [];
@@ -67,9 +67,9 @@ export default async function handler(req, res) {
                 });
         }
 
-        res.status(200).json(query)
+        return res.status(200).json(query)
     } else {
-        res.status(400).json({
+        return res.status(400).json({
             success: false,
             message: 'only method POST allowed',
             data: null

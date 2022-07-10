@@ -18,12 +18,11 @@ export default async function handler(req, res) {
         try {
             result = await User.updateOne({email: req.body.email}, {
                 $set: {
-                    candidate_bem: {
-                        lead_name: req.body.lead_name,
-                        lead_npm: req.body.lead_npm,
-                        co_lead_name: req.body.co_lead_name,
-                        co_lead_npm: req.body.co_lead_npm,
-                        number: req.body.number
+                    candidate: {
+                        name: req.body.name,
+                        npm: req.body.npm,
+                        number: req.body.number,
+                        major: req.body.major,
                     }
                 }
             }, {upsert : true}).exec()
