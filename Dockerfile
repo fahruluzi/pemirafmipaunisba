@@ -1,22 +1,23 @@
-FROM node:14-buster
+FROM node:18-alpine AS builder
 
-RUN mkdir -p /usr/src/app
-ENV PORT 3000
+WORKDIR /app
 
-WORKDIR /usr/src/app
+COPY package.json ./
 
-COPY package.json /usr/src/app
-COPY yarn.lock /usr/src/app
+COPY package-lock.json ./
 
-# Production use node instead of root
-# USER node
+RUN npm install
 
-RUN yarn install 
+COPY . .
 
-COPY . /usr/src/app
+RUN npm run build
 
-RUN yarn build
 
-EXPOSE 3000
-ENV NEXT_TELEMETRY_DISABLED 1
-CMD [ "yarn", "start" ]
+FROM nginx:1.19-alpine AS server
+
+COPY ./etc/nginx.conf /etc/nginx/conf.d/default.conf
+
+COPY --from=builder /app /
+COPY --from=builder /app/public /public
+
+EXPOSE 80
