@@ -19,16 +19,16 @@ const Home = () => {
                         <p className="block text-sm md:text-xl mt-8 xl:mt-10 lg:mt-8 uppercase text-center">hari</p>
                     </div>
                     <div className="bg-white w-32 xl:w-56 lg:w-48 md:w-44 sm:w-36 h-32 xl:h-56 lg:h-48 md:h-44 sm:h-36 rounded-xl lg:rounded-lg px-2 py-8 shadow-count mr-2 sm:mr-1">
-                        <p className="block text-2xl xl:text-8xl lg:text-7xl md:text-7xl sm:text-5xl mb-2 text-center">{days}</p>
-                        <p className="block text-sm md:text-xl mt-8 xl:mt-10 lg:mt-8 uppercase text-center">hari</p>
+                        <p className="block text-2xl xl:text-8xl lg:text-7xl md:text-7xl sm:text-5xl mb-2 text-center">{hours}</p>
+                        <p className="block text-sm md:text-xl mt-8 xl:mt-10 lg:mt-8 uppercase text-center">jam</p>
                     </div>
                     <div className="bg-white w-32 xl:w-56 lg:w-48 md:w-44 sm:w-36 h-32 xl:h-56 lg:h-48 md:h-44 sm:h-36 rounded-xl lg:rounded-lg px-2 py-8 shadow-count mr-2 sm:mr-1">
-                        <p className="block text-2xl xl:text-8xl lg:text-7xl md:text-7xl sm:text-5xl mb-2 text-center">{days}</p>
-                        <p className="block text-sm md:text-xl mt-8 xl:mt-10 lg:mt-8 uppercase text-center">hari</p>
+                        <p className="block text-2xl xl:text-8xl lg:text-7xl md:text-7xl sm:text-5xl mb-2 text-center">{minutes}</p>
+                        <p className="block text-sm md:text-xl mt-8 xl:mt-10 lg:mt-8 uppercase text-center">menit</p>
                     </div>
                     <div className="bg-white w-32 xl:w-56 lg:w-48 md:w-44 sm:w-36 h-32 xl:h-56 lg:h-48 md:h-44 sm:h-36 rounded-xl lg:rounded-lg px-2 py-8 shadow-count mr-2 sm:mr-1">
-                        <p className="block text-2xl xl:text-8xl lg:text-7xl md:text-7xl sm:text-5xl mb-2 text-center">{days}</p>
-                        <p className="block text-sm md:text-xl mt-8 xl:mt-10 lg:mt-8 uppercase text-center">hari</p>
+                        <p className="block text-2xl xl:text-8xl lg:text-7xl md:text-7xl sm:text-5xl mb-2 text-center">{seconds}</p>
+                        <p className="block text-sm md:text-xl mt-8 xl:mt-10 lg:mt-8 uppercase text-center">detik</p>
                     </div>
                 </div>
             </div>
