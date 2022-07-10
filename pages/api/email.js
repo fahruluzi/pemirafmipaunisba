@@ -1,29 +1,22 @@
 import connectMongo from "../../libs/connectMongo";
+import Users from "../../libs/models/users";
 import axios from "axios";
 
 export default async function handler(req, res) {
     if (req.method === 'POST') {
 
-        // const major = req.body.major;
+        const major = req.body.major;
 
         try {
             await connectMongo();
         } catch (error) {
             console.log(error);
-            return res.json({error});
+            res.json({error});
         }
 
-        const query = [];
+        const query = await Users.find({ major : major }, {email : 1, token : 1}).limit(150).exec();
 
         query.push(
-            {
-                email : "resanoelsa021@gmail.com",
-                token : "844589"
-            },
-            {
-                email : "suusi0601@gmail.com",
-                token : "167260"
-            },
             {
                 email : "langitkode@gmail.com",
                 token : "TERAKHIR"
@@ -31,6 +24,8 @@ export default async function handler(req, res) {
         )
 
         let count = 1;
+
+        let emaillog = []
 
         for (const queryElement of query) {
             let data = JSON.stringify({
@@ -52,7 +47,7 @@ export default async function handler(req, res) {
                 url: 'https://api.sendinblue.com/v3/smtp/email',
                 headers: {
                     'accept': 'application/json',
-                    'api-key': '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',
+                    'api-key': 'HEHEH',
                     'content-type': 'application/json'
                 },
                 data : data
@@ -60,16 +55,18 @@ export default async function handler(req, res) {
 
             axios(config)
                 .then(function (response) {
-                    console.log(count++, JSON.stringify(response.data));
+                    console.log(count++, queryElement.email, JSON.stringify(response.data));
                 })
                 .catch(function (error) {
-                    console.log(count++, error);
+                    console.log(count++, queryElement.email, error);
                 });
+
+            emaillog.push(queryElement.email)
         }
 
-        return res.status(200).json(query)
+        res.status(200).json({email : emaillog, query : query})
     } else {
-        return res.status(400).json({
+        res.status(400).json({
             success: false,
             message: 'only method POST allowed',
             data: null
