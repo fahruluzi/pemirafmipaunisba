@@ -8,6 +8,8 @@ import Himasta from "../components/quick_count/himasta";
 import Himatika from "../components/quick_count/himatika";
 import Himafar from "../components/quick_count/himafar";
 import Head from "next/head";
+import {useRouter} from "next/router";
+import jwt from "jsonwebtoken";
 
 const QuickCount = () => {
 
@@ -16,6 +18,27 @@ const QuickCount = () => {
     const handlePageChange = number => {
         setCurrentPage(number)
     };
+
+    const router = useRouter()
+
+    const getAuth = async () => {
+        try {
+            const token = localStorage.getItem('token');
+            if (token === ""){
+                router.push('/login');
+            }else {
+                const verified = jwt.verify(token, "pemira_secret_banget");
+                localStorage.setItem('user', verified)
+            }
+        } catch (error) {
+            router.push('/login');
+        }
+    };
+
+    useState(() => {
+        getAuth()
+    }, [router.pathname]); // eslint-disable-line react-hooks/exhaustive-deps
+
 
     return(
         <>

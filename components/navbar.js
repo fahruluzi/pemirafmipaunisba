@@ -1,7 +1,10 @@
 import NavbarButton from "./navbar_button";
 import Image from "next/image";
+import {useRouter} from "next/router";
 
 export default function Navbar(props) {
+    const router = useRouter()
+
     let {active, handlePageChange, quickCount} = props;
 
     const data = ["beranda", "bem", "himasta", "himatika", "himafar"];
@@ -9,8 +12,8 @@ export default function Navbar(props) {
     return (
         <div id="navbar" className="px-12 py-8 min-w-full fixed z-10 font-poppins uppercase font-medium">
             <div className="flex justify-between">
-                <div className="my-auto">
-                    <Image height={50} width={80} src={"/logo-fmipa.png"} alt={"logo"}></Image>
+                <div className="my-auto cursor-pointer">
+                    <Image height={50} width={80} src={"/logo-fmipa.png"} alt={"logo"} onClick={() => router.push('/')}></Image>
                 </div>
                 <div className="my-auto flex">
                     {data.map((value, index) => {
@@ -21,7 +24,7 @@ export default function Navbar(props) {
                             index--
                         }
                         // eslint-disable-next-line react/jsx-key
-                        return <NavbarButton name={value} active={active === index} handlePageChange={handlePageChange}
+                        return <NavbarButton key={index} name={value} active={active === index} handlePageChange={handlePageChange}
                                              index={index}/>
                     })}
 

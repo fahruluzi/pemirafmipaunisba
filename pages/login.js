@@ -2,12 +2,31 @@ import styles from '../styles/Login.module.scss';
 import Image from "next/image";
 import {useState} from "react";
 import Head from "next/head";
+import axios from "axios";
+import {useRouter} from "next/router";
 
 const Login = () => {
     const [token, setToken] = useState("");
+    const router = useRouter()
 
-    const handleSubmit = () => {
-        console.log(token)
+    const handleSubmit = async () => {
+        const res = await axios.post(`/api/token`, {
+            token: token,
+        });
+
+        console.log(res.response)
+        console.log(res.data)
+
+        if(res.data && res.data.token  && res.data.token !== ""){
+            localStorage.setItem("token", res.data.token)
+            if (res.data.name && res.data.name === "panitia"){
+                router.push("/bem")
+            }else {
+                router.push("/quick-count")
+            }
+        } else {
+            alert("token sudah digunakan")
+        }
     }
 
     return (
@@ -27,11 +46,11 @@ const Login = () => {
 
                     <label className="block text-left mt-6">
                         <span className="block text-sm font-medium text-slate-700">
-                            Email
+                            Token
                           </span>
                         <input type="text" name="token" value={token} onChange={e => setToken(e.target.value)}
                                className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
-                               placeholder="you@example.com"/>
+                               placeholder="000000"/>
                     </label>
 
                     <button type="button" onClick={handleSubmit}
