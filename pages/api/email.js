@@ -1,6 +1,5 @@
-import nodemailer from 'nodemailer';
 import connectMongo from "../../libs/connectMongo";
-import Users from "../../libs/models/users";
+import axios from "axios";
 
 export default async function handler(req, res) {
     if (req.method === 'POST') {
@@ -14,53 +13,58 @@ export default async function handler(req, res) {
             res.json({error});
         }
 
-        // find each person with a last name matching 'Ghost'
-        // const query = await Users.find({major : major}, {email: 1, token : 1}).exec();
+        const query = [];
 
-        // let jsonQuery = query.toJSON()
-
-        let query = []
-
-        for (let i = 0; i < 200; i++) {
-            query.push({
+        query.push(
+            {
+                email : "resanoelsa021@gmail.com",
+                token : "844589"
+            },
+            {
+                email : "suusi0601@gmail.com",
+                token : "167260"
+            },
+            {
                 email : "langitkode@gmail.com",
-                token : "testing banyak :)"
-            })
-        }
-
-        query.push({
-            email : "langitkode@gmail.com",
-            token : "testing banyak :)"
-        })
-
-
-        const transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: 'fahrul.fauz@gmail.com',
-                pass: 'vjieafilqeervwod' // naturally, replace both with your real credentials or an application-specific password
+                token : "TERAKHIR"
             }
-        });
+        )
 
         let count = 1;
+
         for (const queryElement of query) {
-            const mailOptions = {
-                from: '<noreply> no-reply@bppufmipaunisba.com',
-                to: queryElement.email,
-                subject: 'Token PEMIRA FMIPA UNISBA 2022',
-                text: `Token : ${queryElement.token.toString()}`
+            let data = JSON.stringify({
+                "sender": {
+                    "name": "No Reply",
+                    "email": "no-reply@bppufmipaunisba.com"
+                },
+                "to": [
+                    {
+                        "email": queryElement.email,
+                    }
+                ],
+                "subject": "Token PEMIRA FMIPA UNISBA 2022",
+                "htmlContent": "TOKEN : " + queryElement.token.toString()
+            });
+
+            let config = {
+                method: 'post',
+                url: 'https://api.sendinblue.com/v3/smtp/email',
+                headers: {
+                    'accept': 'application/json',
+                    'api-key': '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',
+                    'content-type': 'application/json'
+                },
+                data : data
             };
 
-            count++
-            console.log(count)
-
-            transporter.sendMail(mailOptions, function (error, info) {
-                if (error) {
-                    console.log(error);
-                } else {
-                    console.log('Email sent: ' + info.response);
-                }
-            });
+            axios(config)
+                .then(function (response) {
+                    console.log(count++, JSON.stringify(response.data));
+                })
+                .catch(function (error) {
+                    console.log(count++, error);
+                });
         }
 
         res.status(200).json(query)
