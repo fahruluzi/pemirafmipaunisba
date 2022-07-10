@@ -2,7 +2,4 @@
 .gitignore
 .next/
 .dockerignore
-Dockerfile
-docker-compose.yaml
 node_modules/
-nginx/
