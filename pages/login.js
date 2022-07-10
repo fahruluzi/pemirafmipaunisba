@@ -10,11 +10,16 @@ const Login = () => {
     const [token, setToken] = useState("");
 
     const handleSubmit = async () => {
-        const res = await axios.post(`/api/token`, {
-            token: token,
-        });
+        let res
+        try {
+            res = await axios.post(`/api/token`, {
+                token: token,
+            });
+        } catch (e) {
+            console.log(e)
+        }
 
-        if(res.data && res.data.token  && res.data.token !== ""){
+        if(res && res.data && res.data.token  && res.data.token !== ""){
             localStorage.setItem("token", res.data.token)
 
             delete res.data.token
