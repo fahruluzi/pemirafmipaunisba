@@ -1,7 +1,9 @@
 import styles from '../../styles/landing/Hismasta.module.scss';
 import Image from "next/image";
 
-const Himasta = () => {
+const Himasta = (props) => {
+    const {data} = props;
+
     return (
         <div
             className={styles["landing-container-himasta"]}>
@@ -23,7 +25,7 @@ const Himasta = () => {
                         </div>
                     </div>
 
-                    <span className="font-medium text-6xl block mt-8">80%</span>
+                    <span className="font-medium text-6xl block mt-8">{data && data.data && data.data.himasta1_count}%</span>
 
                     <div className="border-t-2 border-t-gray-400 mt-6 text-right flex justify-between">
                         <span className="text-sm font-bold block mt-2">Nomor Urut 1</span>
@@ -41,7 +43,7 @@ const Himasta = () => {
                         </div>
                     </div>
 
-                    <span className="font-medium text-6xl block mt-8">80%</span>
+                    <span className="font-medium text-6xl block mt-8">{data && data.data && data.data.himasta2_count}%</span>
 
                     <div className="border-t-2 border-t-gray-400 mt-6 text-right flex justify-between">
                         <span className="text-sm font-bold block mt-2">Nomor Urut 2</span>
@@ -60,7 +62,7 @@ const Himasta = () => {
                         </div>
                     </div>
 
-                    <span className="font-medium text-6xl block mt-8">80%</span>
+                    <span className="font-medium text-6xl block mt-8">{data && data.data && data.data.himasta3_count}%</span>
 
                     <div className="border-t-2 border-t-gray-400 mt-6 text-right flex justify-between">
                         <span className="text-sm font-bold block mt-2">Nomor Urut 3</span>
@@ -68,7 +70,7 @@ const Himasta = () => {
                     </div>
                 </div>
             </div>
-            <span className="mt-6 font-bold">JUMLAH PEMILIH : 70%</span>
+            <span className="mt-6 font-bold">JUMLAH PEMILIH : {data && data.data && data.data.himasta_choosed}%</span>
         </div>
     )
 }

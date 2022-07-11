@@ -6,7 +6,6 @@ export default async function handler(req, res) {
         try {
             await connectMongo();
 
-            console.log(req.body)
             await Candidate.insertMany(req.body)
         } catch (error) {
             console.log(error);

@@ -1,7 +1,9 @@
 import styles from '../../styles/landing/Bem.module.scss';
 import Image from "next/image";
 
-const Bem = () => {
+const Bem = (props) => {
+    const { data } = props;
+
     return (
         <div
             className={styles["landing-container-bem"]}>
@@ -29,7 +31,7 @@ const Bem = () => {
                                objectPosition={"top"} />
                     </div>
 
-                    <span className="font-medium text-6xl block mt-8">80%</span>
+                    <span className="font-medium text-6xl block mt-8">{data && data.data && data.data.bem1_count}%</span>
 
                     <div className="border-t-2 border-t-gray-400 mt-6 text-right flex justify-between">
                         <span className="text-sm font-bold block mt-2">Nomor Urut 1</span>
@@ -37,7 +39,7 @@ const Bem = () => {
                     </div>
                 </div>
             </div>
-            <span className="mt-6 font-bold">JUMLAH PEMILIH : 70%</span>
+            <span className="mt-6 font-bold">JUMLAH PEMILIH : {data && data.data && data.data.bem_choosed}%</span>
         </div>
     )
 }

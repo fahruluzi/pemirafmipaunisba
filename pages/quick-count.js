@@ -10,18 +10,17 @@ import Himafar from "../components/quick_count/himafar";
 import Head from "next/head";
 import {useRouter} from "next/router";
 import jwt from "jsonwebtoken";
+import axios from "axios";
 
 const QuickCount = () => {
     const router = useRouter()
 
     const [currentPage, setCurrentPage] = useState(0)
+    const [data, setData] = useState(null)
 
     const handlePageChange = number => {
         setCurrentPage(number)
     };
-
-    console.log(router)
-    console.log("router")
 
     useEffect(() => {
         try {
@@ -39,9 +38,26 @@ const QuickCount = () => {
                 isReady: true,
             });
         }
-
     }, [router.pathname]); // eslint-disable-line react-hooks/exhaustive-deps
 
+    const getData = async () => {
+        try {
+            const res = await axios.get(`/api/quick-count`);
+
+            if (res.status === 200) {
+                setData(res.data)
+            } else {
+                console.log(JSON.stringify(res.data))
+            }
+        }catch (e) {
+            console.log(JSON.stringify(res.data))
+        }
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(() => {
+        getData()
+    }, [])
 
     return (
         <>
@@ -54,10 +70,10 @@ const QuickCount = () => {
                 pageOnChange={handlePageChange}
                 customPageNumber={currentPage}
             >
-                <Bem/>
-                <Himasta/>
-                <Himatika/>
-                <Himafar/>
+                <Bem data={data}/>
+                <Himasta data={data}/>
+                <Himatika data={data}/>
+                <Himafar data={data}/>
             </ReactPageScroller>
         </>
     )
