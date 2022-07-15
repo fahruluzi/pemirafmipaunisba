@@ -1,5 +1,3 @@
-import connectMongo from "../../libs/connectMongo";
-import Users from "../../libs/models/users";
 import jwt from "jsonwebtoken";
 
 export default async function handler(req, res) {
@@ -12,31 +10,13 @@ export default async function handler(req, res) {
             jsonQuery.token = jwt.sign(jsonQuery, "pemira_secret_banget")
 
             return res.status(200).json(jsonQuery)
-        }
-
-        try {
-            await connectMongo();
-        } catch (error) {
-            console.log(error);
-            return res.json({error});
-        }
-
-        // find each person with a last name matching 'Ghost'
-        const query = await Users.findOneAndUpdate({ token : req.body.token }, {used_token : true, login_at : Date.now()}).exec();
-
-        let jsonQuery = query.toJSON()
-
-        if (jsonQuery.used_token) {
+        } else {
             return res.status(400).json({
                 success: false,
-                message: 'token sudah terpakai',
+                message: 'pemilihan sudah selesai dilaksanakan',
                 data: null
             });
         }
-
-        jsonQuery.token = jwt.sign(jsonQuery, "pemira_secret_banget")
-
-        res.status(200).json(jsonQuery)
     } else {
         res.status(400).json({
             success: false,
